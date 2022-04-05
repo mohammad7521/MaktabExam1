@@ -34,8 +34,8 @@ public class FirstLevelCache {
 
             try {
                 session.save(st);
-                session.close();
                 trx.commit();
+                session.close();
             } catch (RuntimeException e) {
                 trx.rollback();
             }
@@ -56,10 +56,10 @@ public class FirstLevelCache {
 
         //getting student attributes after loading it for the first time which is now the first level cache and does not need to be retrieved from the DB.
         System.out.println("calling the student attributes from the cache");
-        System.out.println(loadedStudent.getId());
-        System.out.println(loadedStudent.getFirstName());
-        System.out.println(loadedStudent.getLastName());
-        System.out.println(loadedStudent.getNationalCode());
+        System.out.println("id: "+ loadedStudent.getId());
+        System.out.println("firstName: "+loadedStudent.getFirstName());
+        System.out.println("lastName: "+loadedStudent.getLastName());
+        System.out.println("national code: "+loadedStudent.getNationalCode());
 
         session.getTransaction().commit();
         session.close();
@@ -67,7 +67,7 @@ public class FirstLevelCache {
 
     public static void main(String[] args) {
 
-        Student student = new Student(null, "firstName", "lastName", "1234567890");
+        Student student = new Student(1, "firstName", "lastName", "1234567890");
 
         add(student);
         showInfo(student.getId());
